@@ -2,15 +2,11 @@ provider "aws" {
   region = "us-east-1"
 }
 
-data "aws_security_group" "default" {
-  name   = "default"
-  vpc_id = module.vpc.vpc_id
-}
 
 module "vpc" {
   source = "github.com/terraform-aws-modules/terraform-aws-vpc"
 
-  name = "limontech-vpc"
+  name = "onica-vpc"
 
   cidr = "10.0.0.0/16"
 
@@ -24,7 +20,7 @@ module "vpc" {
   single_nat_gateway = true
 
   tags = {
-    Owner       = "limontech"
+    Owner       = "onica"
     Environment = "dev"
   }
 
@@ -34,7 +30,7 @@ module "vpc" {
 }
 
 resource "aws_security_group" "internal_traffic" {
-  name_prefix = "Lemon"
+  name_prefix = "Onica"
   description = "Allows all traffic from within VPC"
   vpc_id      = module.vpc.vpc_id
 
@@ -57,7 +53,7 @@ resource "aws_security_group" "internal_traffic" {
 
 
   tags = {
-    Name = "lemon-internal"
+    Name = "onica-internal"
   }
 
 }

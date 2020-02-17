@@ -5,28 +5,22 @@ provider "aws" {
 
 module "elastic_beanstalk_application" {
     source      = "git::https://github.com/cloudposse/terraform-aws-elastic-beanstalk-application.git?ref=tags/0.3.0"
-    #namespace   = "limoneno"
-    #stage       = ""
-    name        = "backend"
-    description = "Test elastic_beanstalk_application"
+    name        = "Onica App"
+    description = "Onica App"
   }
 
 module "elastic_beanstalk_environment" {
   source                             = "git::https://github.com/cloudposse/terraform-aws-elastic-beanstalk-environment.git?ref=master"
-  #namespace                          = var.namespace
-  #stage                              = var.stage
-  name                               = "backend-blue"
-  description                        = "backend-blue"
+  name                               = "onica-app-blue"
+  description                        = "Onica App Blue"
   region                             = "us-east-1"
-  #availability_zone_selector         = "Any 2"
-  #dns_zone_id                        = var.dns_zone_id
   elastic_beanstalk_application_name = module.elastic_beanstalk_application.elastic_beanstalk_application_name
   force_destroy = true
 
   instance_type           = "t3.micro"
-  keypair                 = "limon"
+  keypair                 = "onica"
   autoscale_min           = 1
-  autoscale_max           = 2
+  autoscale_max           = 3
   updating_min_in_service = 0
   updating_max_batch      = 1
 
