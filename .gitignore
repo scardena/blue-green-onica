@@ -4,3 +4,8 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+
+
+
+# .tfvars
+credentials.tfvars

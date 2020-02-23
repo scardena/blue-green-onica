@@ -2,7 +2,6 @@ provider "aws" {
   region = "us-east-1"
 }
 
-
 module "elastic_beanstalk_application" {
     source      = "git::https://github.com/cloudposse/terraform-aws-elastic-beanstalk-application.git?ref=tags/0.3.0"
     name        = "Onica App"
@@ -29,7 +28,8 @@ module "elastic_beanstalk_environment" {
   vpc_id                  = data.aws_vpc.vpc.id 
   loadbalancer_subnets    = [data.aws_subnet.public_sn_1.id,data.aws_subnet.public_sn_2.id,data.aws_subnet.public_sn_3.id]              
   application_subnets     = [data.aws_subnet.private_sn_1.id,data.aws_subnet.private_sn_2.id,data.aws_subnet.private_sn_3.id]              
-  allowed_security_groups = [data.aws_security_group.internal_traffic.id]                    
+  #allowed_security_groups = [data.aws_security_group.internal_traffic.id]                    
+  allowed_security_groups = ["sg-0baec8ecce151b3a1"]                    
 
   // https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html
   // https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.docker

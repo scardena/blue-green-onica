@@ -14,6 +14,8 @@ module "bastion" {
   ssh_key_name   = "onica"
   #Lock this to office/vpn only
 
+  ingress_cidr_blocks = []
+
   tags = {
     Project = "Test"
   }
